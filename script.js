@@ -9,18 +9,34 @@ let main = document.querySelector('main');
 main.style.width='100vw';
 main.style.height='100vh'
 
+let player1Input = document.querySelector("#player1Input");
+let player2Input = document.querySelector('#player2Input');
+
+
 
 let gridBlock =[];
 
 //PLAYER LOGIC
 
-function makePlayer(name, symbol){
+function makePlayer(symbol){
     let inventory = [];
-    return{name, symbol, inventory}
+    return{symbol, inventory}
 }
 
-let player1= makePlayer("Luke", "X");
-let player2 = makePlayer("Jenelyn", "O");
+let player1= makePlayer("X");
+let player2 = makePlayer("O");
+
+function inputForm(){
+    player1.name=player1Input.value;
+    player2.name=player2Input.value;
+    player1Input.value="";
+    player2Input.value="";
+
+    let versus = document.createElement('div');
+    versus.textContent= player1.name+" "+"vs"+" "+player2.name;
+    main.appendChild(versus);
+
+}
 
 
 //WINNING NUMBERS/COMBINATIONS
@@ -39,21 +55,13 @@ let winningNumber = [
 let gameover=false;
 
 //GAMEBOARD LOGIC
-
 let gameboard = ()=>{
 
-    
     //CONTAINER AND BLOCK STYLE
     let container= document.createElement('div');
     
     if(container){
-        container.style.width='75vh';
-        container.style.height='75vh';
-        container.style.border="2px solid black";
-        container.style.display='grid';
-        container.style.gridTemplateColumns='1fr 1fr 1fr';
-        container.style.gridTemplateRows='1fr 1fr 1fr';
-        
+        container.classList.add('container');
     }
 
     main.appendChild(container);
@@ -111,13 +119,6 @@ let gameboard = ()=>{
 
        
 }
+console.log(gameboard());
 
 
-//Whoever clicks the 'number', that div is removed from 'gridBlock' and either placed 
-//into player1.inventory, or player2.inventory. It happens on button click.
-
-function gameRules(){
-    if(player1){
-        
-    }
-}
