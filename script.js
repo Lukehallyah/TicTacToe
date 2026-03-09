@@ -81,14 +81,15 @@ let gameboard = ()=>{
             number.style.alignItems='center';
             number.style.fontSize='3rem';
             container.appendChild(number);
-            gridBlock.push(number);
-
+            
 
             number.addEventListener('click',()=>{
                 if(gameover) return;
 
                 if(!number.textContent){
                 currentPlayer.inventory.push(i);
+                gridBlock.push(number);
+
                 number.textContent=currentPlayer.symbol;
                 }
 
@@ -98,6 +99,11 @@ let gameboard = ()=>{
                         alert("You Win!")
                         gameover=true;
                     }
+                }
+
+                 if(gridBlock.length===9){
+                    gameover=true;
+                    alert("It's a tie!")
                 }
                 //EXPLAIN - for every 'array' of winningNumber
                 //check the currentPlayer inventory and see if it includes that number set
