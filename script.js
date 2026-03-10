@@ -100,15 +100,17 @@ let gameboard = ()=>{
                 number.textContent=currentPlayer.symbol;
                 }
 
-               
+                let gameWin=false;
                 for( let number of winningNumber){
                     if(number.every(num=>currentPlayer.inventory.includes(num))){
                         alert("You Win!")
                         gameover=true;
+                        gameWin=true;
                     }
                 }
 
-                 if(gridBlock.length===9){
+                 if(gridBlock.length===9 && !gameWin){
+                    //'gameWin' means true, !gameWin means false or 'not gameWin'
                     gameover=true;
                     alert("It's a tie!")
                 }
@@ -132,7 +134,7 @@ let gameboard = ()=>{
 
       
     
-        let beginGame = document.createElement('div');
+    let beginGame = document.createElement('div');
         beginGame.classList.add('beginGame');
     let startButton = document.createElement('button');
         startButton.textContent='Start';
@@ -156,8 +158,8 @@ let gameboard = ()=>{
                 }
 
             gridBlock=[];
-
-
+            gameover=false;
+            currentPlayer=player1;
            
         })
     beginGame.appendChild(startButton);
