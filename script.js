@@ -39,6 +39,7 @@ function inputForm(){
     //Wow this actually worked, disappeared
 
     let versus = document.createElement('div');
+    versus.classList.add('versus');
     versus.textContent= player1.name+" "+"vs"+" "+player2.name;
     main.appendChild(versus);
     main.style.display='flex';
@@ -142,7 +143,7 @@ let gameboard = ()=>{
             main.appendChild(form);
             isFormUp=true;
 
-            if(isFormUp=true){
+            if(isFormUp===true){
                 beginGame.removeChild(startButton);
             }
             
@@ -160,7 +161,14 @@ let gameboard = ()=>{
             gridBlock=[];
             gameover=false;
             currentPlayer=player1;
-           
+            beginGame.appendChild(startButton);
+            beginGame.appendChild(resetButton);
+            let versus = document.querySelector('.versus');
+            //by assigning classes in a 'local scope', you can access that variable in another scope
+            versus.textContent=''; 
+            main.removeChild(versus);
+            player1.name='';
+            player2.name='';   
         })
     beginGame.appendChild(startButton);
     beginGame.appendChild(resetButton);
