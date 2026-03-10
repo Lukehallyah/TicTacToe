@@ -63,13 +63,28 @@ header{
   align-items: center;
 }
 
+
 main{
-  height: 100vh;
-  width: 100vw;
+  padding: 0;
+  margin: 0;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.beginGame{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 75vh;
+
+}
+
+.beginGame button{
+  width: 50%;
+  background-color: rgb(1, 1, 69);
+  color: white;
 }
 
 .container{
@@ -82,11 +97,17 @@ main{
 }
 
 main form{
+  width: 75vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  border: 2px solid black;
 }
 
+
+form input{
+  width: 35%;
+}
 form button{
   display: flex;
   justify-content: center;
@@ -99,6 +120,7 @@ form button{
   main{
     height: 100vh;
     width: 100vw;
+   
 
   }
 

@@ -6,12 +6,15 @@
 //create 2 player objects
 
 let main = document.querySelector('main');
-main.style.width='100vw';
-main.style.height='100vh'
+let container= document.createElement('div');
+let isFormUp = false;
 
+
+
+let form = document.querySelector('form');
 let player1Input = document.querySelector("#player1Input");
 let player2Input = document.querySelector('#player2Input');
-
+main.removeChild(form);
 
 
 let gridBlock =[];
@@ -32,10 +35,14 @@ function inputForm(){
     player1Input.value="";
     player2Input.value="";
 
+    main.removeChild(form);
+    //Wow this actually worked, disappeared
+
     let versus = document.createElement('div');
     versus.textContent= player1.name+" "+"vs"+" "+player2.name;
     main.appendChild(versus);
-
+    main.style.display='flex';
+    main.style.flexDirection='column';
 }
 
 
@@ -58,13 +65,13 @@ let gameover=false;
 let gameboard = ()=>{
 
     //CONTAINER AND BLOCK STYLE
-    let container= document.createElement('div');
     
     if(container){
         container.classList.add('container');
     }
 
     main.appendChild(container);
+
 
     let currentPlayer = player1;
 
@@ -123,8 +130,46 @@ let gameboard = ()=>{
         //Number only accessible inside the for loop
     }
 
-       
+      
+    
+        let beginGame = document.createElement('div');
+        beginGame.classList.add('beginGame');
+    let startButton = document.createElement('button');
+        startButton.textContent='Start';
+        startButton.addEventListener('click', ()=>{
+            main.appendChild(form);
+            isFormUp=true;
+
+            if(isFormUp=true){
+                beginGame.removeChild(startButton);
+            }
+            
+        });
+    let resetButton = document.createElement('button');
+        resetButton.textContent='Reset';
+        resetButton.addEventListener('click', ()=>{
+            player1.inventory.length=0;
+            player2.inventory.length=0;
+
+            for(let block of gridBlock){
+                 block.textContent='';
+                }
+
+            gridBlock=[];
+
+
+           
+        })
+    beginGame.appendChild(startButton);
+    beginGame.appendChild(resetButton);
+    main.appendChild(beginGame);
 }
+
+
 console.log(gameboard());
+
+//let startButton = document.querySelector('.startButton');
+//let resetButton =document.querySelector('.resetButton');
+
 
 
