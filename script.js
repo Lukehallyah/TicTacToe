@@ -36,14 +36,8 @@ function inputForm(){
     player2Input.value="";
 
     main.removeChild(form);
+    isFormUp=false;
     //Wow this actually worked, disappeared
-
-    let versus = document.createElement('div');
-    versus.classList.add('versus');
-    versus.textContent= player1.name+" "+"vs"+" "+player2.name;
-    main.appendChild(versus);
-    main.style.display='flex';
-    main.style.flexDirection='column';
 }
 
 
@@ -104,7 +98,7 @@ let gameboard = ()=>{
                 let gameWin=false;
                 for( let number of winningNumber){
                     if(number.every(num=>currentPlayer.inventory.includes(num))){
-                        alert("You Win!")
+                        alert(`${currentPlayer.name} Wins!`)
                         gameover=true;
                         gameWin=true;
                     }
@@ -140,17 +134,22 @@ let gameboard = ()=>{
     let startButton = document.createElement('button');
         startButton.textContent='Start';
         startButton.addEventListener('click', ()=>{
-            main.appendChild(form);
-            isFormUp=true;
-
-            if(isFormUp===true){
-                beginGame.removeChild(startButton);
+            if(!isFormUp){
+                //What I want is if this is true, do not main.appendChild(form)
+                main.appendChild(form);
+                
+                isFormUp=true;
             }
             
         });
     let resetButton = document.createElement('button');
         resetButton.textContent='Reset';
-        resetButton.addEventListener('click', ()=>{
+        resetButton.addEventListener('click', (e)=>{
+            e.preventDefault();
+            if(isFormUp){
+                main.removeChild(form);
+                isFormUp=false;
+            }
             player1.inventory.length=0;
             player2.inventory.length=0;
 
@@ -161,16 +160,13 @@ let gameboard = ()=>{
             gridBlock=[];
             gameover=false;
             currentPlayer=player1;
-            beginGame.appendChild(startButton);
-            beginGame.appendChild(resetButton);
-            let versus = document.querySelector('.versus');
-            //by assigning classes in a 'local scope', you can access that variable in another scope
-            versus.textContent=''; 
-            main.removeChild(versus);
+
             player1.name='';
-            player2.name='';   
+            player2.name='';
+            //Have to fix so that it removes the form on reset.
+
         })
-    beginGame.appendChild(startButton);
+    beginGame.appendChild(startButton, beginGame.firstChild);//always make sure it's first child
     beginGame.appendChild(resetButton);
     main.appendChild(beginGame);
 }
